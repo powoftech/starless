@@ -1,0 +1,26 @@
+{
+  "name": "star-sweeper",
+  "version": "1.0.0",
+  "description": "CLI tool to unstar all starred GitHub repositories for the authenticated user",
+  "module": "index.ts",
+  "type": "module",
+  "bin": {
+    "star-sweeper": "./index.ts"
+  },
+  "scripts": {
+    "start": "bun run index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "commander": "^14.0.3",
+    "octokit": "^5.0.5"
+  }
+}
