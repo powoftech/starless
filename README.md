@@ -1,4 +1,4 @@
-# star-sweeper
+# Star Sweeper
 
 A CLI tool to unstar all GitHub repositories starred by the authenticated user.
 
