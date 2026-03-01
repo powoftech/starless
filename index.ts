@@ -1,4 +1,5 @@
 #!/usr/bin/env bun
+import { readSync } from "fs";
 import { program } from "commander";
 import { createClient, fetchAllStarred, getAuthenticatedUser, unstarRepo } from "./src/github.ts";
 import type { CliOptions, StarredRepo, UnstarResult } from "./src/types.ts";
@@ -33,7 +34,7 @@ async function confirm(question: string): Promise<boolean> {
   const buf = Buffer.alloc(64);
   const fd = process.stdin.fd;
   try {
-    const n = require("fs").readSync(fd, buf, 0, buf.length, null);
+    const n = readSync(fd, buf, 0, buf.length, null);
     const answer = buf.slice(0, n).toString().trim().toLowerCase();
     return answer === "y" || answer === "yes";
   } catch {
@@ -75,11 +76,14 @@ async function runConcurrent(
 }
 
 function printTable(repos: StarredRepo[]): void {
-  const maxName = Math.min(
-    50,
-    repos.reduce((m, r) => Math.max(m, r.fullName.length), 0),
-  );
-  const maxLang = repos.reduce((m, r) => Math.max(m, (r.language ?? "—").length), 8);
+  let maxName = 0;
+  let maxLang = 8;
+  for (const r of repos) {
+    if (r.fullName.length > maxName) maxName = r.fullName.length;
+    const langLen = (r.language ?? "—").length;
+    if (langLen > maxLang) maxLang = langLen;
+  }
+  maxName = Math.min(50, maxName);
 
   const header = `  ${"Repository".padEnd(maxName)}  ${"Language".padEnd(maxLang)}  Starred At`;
   console.log(fmt(BOLD, header));

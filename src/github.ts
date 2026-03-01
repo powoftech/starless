@@ -3,6 +3,8 @@ import type { StarredRepo, UnstarResult } from "./types.ts";
 
 type RepoObject = {
   full_name: string;
+  name: string;
+  owner: { login: string };
   description: string | null;
   language: string | null;
 };
@@ -33,11 +35,9 @@ export async function fetchAllStarred(octokit: Octokit, onPage?: (fetched: numbe
   })) {
     for (const item of response.data as StarItem[]) {
       const { repo, starredAt } = extractRepo(item);
-      const [owner, name] = repo.full_name.split("/");
-
       repos.push({
-        owner: owner ?? "",
-        repo: name ?? "",
+        owner: repo.owner.login,
+        repo: repo.name,
         fullName: repo.full_name,
         description: repo.description,
         language: typeof repo.language === "string" ? repo.language : null,
