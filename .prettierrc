@@ -1,18 +1,13 @@
 {
   "$schema": "https://www.schemastore.org/prettierrc.json",
-  "arrowParens": "avoid",
+  "endOfLine": "lf",
   "printWidth": 120,
-  "trailingComma": "all",
-  "useTabs": false,
-  "quoteProps": "preserve",
+  "semi": false,
   "overrides": [
     {
       "files": [".vscode/*.json"],
       "options": {
-        "parser": "jsonc",
-        "quoteProps": "preserve",
-        "singleQuote": false,
-        "trailingComma": "all"
+        "parser": "jsonc"
       }
     },
     {

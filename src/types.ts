@@ -1,22 +1,22 @@
+export interface CliOptions {
+  concurrency: number
+  delay: number
+  dryRun: boolean
+  token: string
+  yes: boolean
+}
+
 export interface StarredRepo {
-  owner: string;
-  name: string;
-  fullName: string;
-  description: string | null;
-  language: string | null;
-  stargazersCount: number | null;
+  description: null | string
+  fullName: string
+  language: null | string
+  name: string
+  owner: string
+  stargazersCount: null | number
 }
 
 export interface UnstarResult {
-  repo: StarredRepo;
-  success: boolean;
-  error?: string;
-}
-
-export interface CliOptions {
-  token: string;
-  dryRun: boolean;
-  yes: boolean;
-  delay: number;
-  concurrency: number;
+  error?: string
+  repo: StarredRepo
+  success: boolean
 }
