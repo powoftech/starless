@@ -85,15 +85,15 @@ function printTable(repos: StarredRepo[]): void {
   }
   maxName = Math.min(50, maxName);
 
-  const header = `  ${"Repository".padEnd(maxName)}  ${"Language".padEnd(maxLang)}  Starred At`;
+  const header = `  ${"Repository".padEnd(maxName)}  ${"Language".padEnd(maxLang)}  Stargazers`;
   console.log(fmt(BOLD, header));
   console.log(fmt(DIM, "  " + "─".repeat(header.length - 2)));
 
   for (const repo of repos) {
     const name = repo.fullName.padEnd(maxName);
     const lang = (repo.language ?? "—").padEnd(maxLang);
-    const date = repo.starredAt ? repo.starredAt.slice(0, 10) : "—";
-    console.log(`  ${fmt(CYAN, name)}  ${fmt(YELLOW, lang)}  ${fmt(DIM, date)}`);
+    const stargazers = repo.stargazersCount !== null ? repo.stargazersCount.toLocaleString() : "—";
+    console.log(`  ${fmt(CYAN, name)}  ${fmt(YELLOW, lang)}  ${fmt(DIM, stargazers)}`);
   }
 }
 

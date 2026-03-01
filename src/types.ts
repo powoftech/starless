@@ -1,10 +1,10 @@
 export interface StarredRepo {
   owner: string;
-  repo: string;
+  name: string;
   fullName: string;
   description: string | null;
   language: string | null;
-  starredAt: string | null;
+  stargazersCount: number | null;
 }
 
 export interface UnstarResult {
