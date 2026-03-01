@@ -18,5 +18,15 @@ export default defineConfig(
     },
   },
   perfectionist.configs["recommended-natural"],
+  {
+    rules: {
+      "perfectionist/sort-objects": [
+        'error',
+        {
+          type: 'unsorted',
+        },
+      ],
+    },
+  },
   prettierConfig,
 )
