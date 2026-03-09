@@ -14,7 +14,6 @@ export async function fetchAllStarred(octokit: Octokit, onPage?: (fetched: numbe
   })) {
     for (const repo of response.data) {
       repos.push({
-        description: repo.description,
         fullName: repo.full_name,
         language: typeof repo.language === "string" ? repo.language : null,
         name: repo.name,

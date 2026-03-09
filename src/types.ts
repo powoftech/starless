@@ -7,7 +7,6 @@ export interface CliOptions {
 }
 
 export interface StarredRepo {
-  description: null | string
   fullName: string
   language: null | string
   name: string
