@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "bun run index.ts",
-    "build": "bun build --compile index.ts --outfile dist/starless --production --bytecode",
+    "build": "bun build --compile --production --bytecode index.ts --outfile dist/starless",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint": "eslint .",
