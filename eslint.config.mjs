@@ -21,9 +21,9 @@ export default defineConfig(
   {
     rules: {
       "perfectionist/sort-objects": [
-        'error',
+        "error",
         {
-          type: 'unsorted',
+          type: "unsorted",
         },
       ],
     },
