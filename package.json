@@ -10,10 +10,12 @@
   "scripts": {
     "start": "bun run index.ts",
     "build": "bun build --compile --production --bytecode index.ts --outfile dist/starless",
-    "format:check": "prettier --check .",
-    "format:write": "prettier --write .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
     "typecheck": "tsc --noEmit"
   },
   "private": true,

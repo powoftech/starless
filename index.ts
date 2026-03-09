@@ -3,12 +3,12 @@
 import { program } from "commander"
 import { readSync } from "fs"
 
-import type { CliOptions, StarredRepo, UnstarResult } from "./src/types.ts"
+import type { CliOptions, StarredRepo } from "./src/types.ts"
 
 import pkg from "./package.json"
 import { createClient, fetchAllStarred, getAuthenticatedUser, unstarRepo } from "./src/github.ts"
+import { fmt, runConcurrent } from "./src/utils.ts"
 
-const RESET = "\x1b[0m"
 const BOLD = "\x1b[1m"
 const DIM = "\x1b[2m"
 const RED = "\x1b[31m"
@@ -36,10 +36,6 @@ function confirm(question: string): boolean {
   } catch {
     return false
   }
-}
-
-function fmt(color: string, text: string): string {
-  return `${color}${text}${RESET}`
 }
 
 function printProgress(current: number, total: number, label: string): void {
@@ -73,40 +69,6 @@ function printTable(repos: StarredRepo[]): void {
     const stargazers = repo.stargazersCount !== null ? repo.stargazersCount.toLocaleString() : "—"
     console.log(`  ${fmt(CYAN, name)}  ${fmt(YELLOW, lang)}  ${fmt(DIM, stargazers)}`)
   }
-}
-
-async function runConcurrent(
-  repos: StarredRepo[],
-  concurrency: number,
-  delay: number,
-  worker: (repo: StarredRepo) => Promise<UnstarResult>,
-  onDone: (completed: number) => void,
-): Promise<UnstarResult[]> {
-  const results: UnstarResult[] = new Array<UnstarResult>(repos.length)
-  let nextIndex = 0
-  let completed = 0
-
-  async function runSlot(): Promise<void> {
-    while (nextIndex < repos.length) {
-      const index = nextIndex++
-      const repo = repos[index]
-      if (!repo) continue
-      results[index] = await worker(repo)
-      completed++
-      onDone(completed)
-      if (delay > 0 && nextIndex < repos.length) {
-        await sleep(delay)
-      }
-    }
-  }
-
-  const slots = Math.min(concurrency, repos.length)
-  await Promise.all(Array.from({ length: slots }, runSlot))
-  return results
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 program

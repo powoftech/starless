@@ -8,7 +8,7 @@ on:
 
 jobs:
   check:
-    name: Lint, Format & Type Check
+    name: Check code quality and run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -28,3 +28,6 @@ jobs:
 
       - name: Type check
         run: bun run typecheck
+
+      - name: Test
+        run: bun run test
