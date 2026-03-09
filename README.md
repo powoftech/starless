@@ -1,4 +1,4 @@
-# Star Sweeper
+# Starless
 
 A CLI tool to unstar all GitHub repositories starred by the authenticated user.
 
@@ -16,7 +16,7 @@ bun install
 ## Usage
 
 ```text
-Usage: star-sweeper [options]
+Usage: starless [options]
 
 Options:
   -t, --token <token>   GitHub personal access token (overrides GITHUB_TOKEN env var)

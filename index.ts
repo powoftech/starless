@@ -103,7 +103,7 @@ function sleep(ms: number): Promise<void> {
 }
 
 program
-  .name("star-sweeper")
+  .name("starless")
   .description("Unstar all GitHub repositories starred by the authenticated user")
   .option("-t, --token <token>", "GitHub personal access token (overrides GITHUB_TOKEN env var)")
   .option("--dry-run", "List starred repos without unstarring them", false)
@@ -132,7 +132,7 @@ const options: CliOptions = {
 
 async function main(): Promise<void> {
   console.log()
-  console.log(fmt(BOLD, "★  Star Sweeper"))
+  console.log(fmt(BOLD, "★  Starless"))
   console.log(fmt(DIM, "   Bulk-unstar your GitHub repositories\n"))
 
   if (!options.token) {

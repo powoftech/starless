@@ -1,11 +1,11 @@
 {
-  "name": "star-sweeper",
+  "name": "starless",
   "version": "1.0.0",
   "description": "CLI tool to unstar all starred GitHub repositories for the authenticated user",
   "module": "index.ts",
   "type": "module",
   "bin": {
-    "star-sweeper": "./index.ts"
+    "starless": "./index.ts"
   },
   "scripts": {
     "start": "bun run index.ts",
