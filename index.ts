@@ -21,6 +21,11 @@ function clearLine(): void {
 }
 
 function confirm(question: string): boolean {
+  if (!process.stdin.isTTY) {
+    console.log(fmt(DIM, "\n  (Non-interactive mode detected, aborting)"))
+    return false
+  }
+
   process.stdout.write(`${question} ${fmt(DIM, "[y/N]")} `)
   const buf = Buffer.alloc(64)
   const fd = process.stdin.fd
@@ -136,6 +141,11 @@ async function main(): Promise<void> {
   console.log()
   console.log(fmt(BOLD, "★  Starless"))
   console.log(fmt(DIM, "   Bulk-unstar your GitHub repositories\n"))
+
+  if (opts.token) {
+    console.log(`${fmt(YELLOW, "⚠")}  Warning: Token provided via --token flag is visible in shell history.`)
+    console.log(fmt(DIM, "   Consider using GITHUB_TOKEN environment variable for better security.\n"))
+  }
 
   if (!options.token) {
     console.error(

@@ -1,7 +1,7 @@
 {
   "name": "starless",
   "version": "1.0.1",
-  "description": "CLI tool to unstar all starred GitHub repositories for the authenticated user",
+  "description": "A CLI tool to unstar all GitHub repositories starred by the authenticated user.",
   "module": "index.ts",
   "type": "module",
   "bin": {
