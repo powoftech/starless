@@ -1,9 +1,11 @@
 #!/usr/bin/env bun
+
 import { program } from "commander"
 import { readSync } from "fs"
 
 import type { CliOptions, StarredRepo, UnstarResult } from "./src/types.ts"
 
+import pkg from "./package.json"
 import { createClient, fetchAllStarred, getAuthenticatedUser, unstarRepo } from "./src/github.ts"
 
 const RESET = "\x1b[0m"
@@ -110,7 +112,7 @@ program
   .option("-y, --yes", "Skip confirmation prompt", false)
   .option("--delay <ms>", "Delay in ms between each unstar request (per worker)", "0")
   .option("--concurrency <n>", "Number of parallel unstar requests", "5")
-  .version("1.0.0")
+  .version(pkg.version)
 
 program.parse()
 
